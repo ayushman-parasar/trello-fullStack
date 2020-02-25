@@ -47,7 +47,8 @@ class App extends React.Component {
       this.setState({
           boards:res.data.boards.boardsCreated
       })
-      console.log(res);
+      // console.log(res)
+      
   }))
   }
 
