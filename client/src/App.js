@@ -15,6 +15,7 @@ import axios from "axios";
 import CreatedBoardForm from './components/dashboard/createBoardForm';
 import ShowBoard from './components/dashboard/ShowBoards';
 import BoardDetail from './components/dashboard/BoardDetail';
+import CreateListForm from './components/dashboard/CreateListForm';
 
 class App extends React.Component {
   constructor(){
@@ -90,13 +91,12 @@ class App extends React.Component {
         <Route path="/:userId/boards" exact>
           <ShowBoard user={this.state.currentUser} boards={this.state.boards}/>
         </Route>
-        
         <Route path="/:userId/:boardId/view" exact>
           <BoardDetail />
         </Route>
 
-        <Route path="/:userId/:boardId/card" exact>
-          {/* <ShowBoard user={this.state.currentUser} boards={this.state.boards}/> */}
+        <Route path="/:userId/:boardId/list" exact>
+          <CreateListForm />
         </Route>
         <Route>
           <Redirect to="/dashboard/b" />

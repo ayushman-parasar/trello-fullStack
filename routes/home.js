@@ -106,7 +106,9 @@ router.post('/:boardId/list/create',auth.verifyToken,(req, res, next)=>{
                     foundBoard.save()
                     // console.log(foundBoard)
                     // res.redirect(`/home/board/${foundBoard.id}/view`)
-                    res.json({"updatedBoard":foundBoard})
+                    // res.json({"updatedBoard":foundBoard})
+                    //made the below changes for showing list created instead of updated Board
+                    res.json({"listCreated":list, "updatedBoard":foundBoard})
                 })
                 // if(err) return next(err)
                 // res.json({list,updBoard})

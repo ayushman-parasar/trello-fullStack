@@ -50,8 +50,8 @@ class ShowBoard extends React.Component {
                             
                             {this.props.boards.map((board)=>{
                                 return(
-                                    <Flex>
-                                        <Box width={100} height={70} border="1px solid" bg={this.state.colors[Math.floor(Math.random() * Math.floor(4))]} >
+                                    <Flex >
+                                        <Box key={board._id} width={100} height={70} border="1px solid" bg={this.state.colors[Math.floor(Math.random() * Math.floor(4))]} >
                                             <Link to={`/${this.props.user._id}/${board._id}/view`}>
                                                 {board.title}
                                             </Link>
