@@ -31,25 +31,32 @@ class BoardDetail extends React.Component{
     render(){
         return(
             <Box >
-                {/* {this.state.currentBoard?(<h2>Something Exist</h2>):<h1>checking</h1>} */}
-                {/* {this.state.currentBoard._id} */}
-                {
-                    this.state.currentBoard ? this.state.currentBoard.lists.map(list=>{
-                        return(<Box key={list._id}>
-                                <Flex direction="row">
-                                    <Editable defaultValue={`${list.title}`}>
-                                        <EditablePreview />
-                                        <EditableInput />
-                                    </Editable>
-                                </Flex>
-                        </Box>)
-                    }
-
-                    ):null
-                } 
-                <Box>
+                
+                <Box bg="skyblue" width={120} rounded="lg" p={2} m={2} textAlign="center" >
                     <Link to={`/${this.props.match.params.userId}/${this.props.match.params.boardId}/list`}>Create List</Link>
                 </Box>
+                <Flex direction="row">
+                    {
+                        this.state.currentBoard ? this.state.currentBoard.lists.map(list=>{
+                            return(<Box borderWidth="1px" rounded="lg" mr={4} textAlign="center" borderColor="black" key={list._id}>
+                                    <Flex direction="row">
+                                        <Box width="100%" height="30vh" boxShadow="md">
+                                            <Editable width="150px" defaultValue={`${list.title}`}>
+                                                <EditablePreview />
+                                                <EditableInput />
+                                            </Editable>
+                                            <Box fontSize="12px" >
+                                                <Link to="#">create card</Link>
+                                            </Box>
+                                        </Box>
+                                    </Flex>
+                            </Box>)
+                        }
+
+                        ):null
+                    } 
+                </Flex>
+                
                 
             </Box>
         )
