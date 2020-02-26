@@ -46,7 +46,7 @@ class BoardDetail extends React.Component{
                                                 <EditableInput />
                                             </Editable>
                                             <Box fontSize="12px" >
-                                                <Link to="#">create card</Link>
+                                                <Link to={`/${this.props.match.params.boardId}/${list._id}`}>create card</Link>
                                             </Box>
                                         </Box>
                                     </Flex>

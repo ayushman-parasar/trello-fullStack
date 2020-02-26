@@ -5,13 +5,12 @@ import {withRouter} from "react-router-dom"
 
 
 
-class CreatedListForm extends React.Component{
+class CreatedCardForm extends React.Component{
     constructor(props){
         super(props)
         this.state={
             title:"",
-            description:"",
-            createdList:null
+            createdCard:null
         }
     }
     handleChange=(event)=>{
@@ -23,19 +22,9 @@ class CreatedListForm extends React.Component{
     }
     handleSubmit=(event)=>{
         event.preventDefault();
-        axios(`/home/${this.props.match.params.boardId}/list/create`,{
-            method:"POST",
-            headers:{
-                "Content-Type":"application/json",
-                "authorization":localStorage.token || ""
-            },
-            data:{ title:this.state.title }
-        }).then(res =>{
-            this.setState({
-                createdList:res.data.listCreated
-            })
-            this.props.history.push(`/${this.props.match.params.userId}/${this.props.match.params.boardId}/view`)
-        })
+        // on creating without axios it shows login screen bug
+        // axios('/home/')
+        this.props.history.push('')
     }
 
     render(){
@@ -51,7 +40,7 @@ class CreatedListForm extends React.Component{
                                     <Input type="text" name="title" value={this.state.title} onChange={this.handleChange} placeholder="Enter title" />
                                 </InputGroup>
                             </FormControl>
-                            <Button type="submit" variant="solid" variantColor="blue" boxShadow="sm" _hover={{boxshadow : "md"}} _active={{boxshadow : "lg"}}>Create List</Button>
+                            <Button type="submit" variant="solid" variantColor="blue" boxShadow="sm" _hover={{boxshadow : "md"}} _active={{boxshadow : "lg"}}>Create Card</Button>
                             
                         </Stack>
                     </form>
@@ -63,4 +52,4 @@ class CreatedListForm extends React.Component{
     }
 }
 
-export default withRouter(CreatedListForm)
+export default withRouter(CreatedCardForm)

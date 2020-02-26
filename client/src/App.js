@@ -1,6 +1,6 @@
 import React from 'react';
 // import logo from './logo.svg';
-import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom"
+import { BrowserRouter as Router, Switch, Route, Link, Redirect} from "react-router-dom"
 import Home from "./components/home/home"
 import Login from "./components/signing/login"
 import Register from "./components/signing/register"
@@ -16,6 +16,7 @@ import CreatedBoardForm from './components/dashboard/createBoardForm';
 import ShowBoard from './components/dashboard/ShowBoards';
 import BoardDetail from './components/dashboard/BoardDetail';
 import CreateListForm from './components/dashboard/CreateListForm';
+import CreateCardForm from './components/dashboard/CreateCardForm';
 
 class App extends React.Component {
   constructor(){
@@ -27,6 +28,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    console.log("local",localStorage)
     axios("/users", {
       method: "GET",
       headers: {
@@ -74,6 +76,7 @@ class App extends React.Component {
         </Route>
         <Route path="/users/register" component={Register} />
         <Route>
+          { console.log("checking")}
           <Redirect to="/users/login" />
         </Route>
       </Switch>
@@ -83,6 +86,7 @@ class App extends React.Component {
   privateRoutes = () => {
     return (
       <Switch>
+        { console.log("checking privateRoute")}
         <Route path="/dashboard/b" exact >
           <DashBoard logout={this.logOutUser} user={this.state.currentUser}/>
         </Route>
@@ -98,6 +102,9 @@ class App extends React.Component {
 
         <Route path="/:userId/:boardId/list" exact>
           <CreateListForm />
+        </Route>
+        <Route path="/:boardId/:listId/card" >
+          <CreateCardForm />
         </Route>
         <Route>
           <Redirect to="/dashboard/b" />
@@ -126,6 +133,7 @@ class App extends React.Component {
   
         {
           localStorage.token && this.state.currentUser ? this.privateRoutes() : this.publicRoutes()
+          
         }
   
       </Router>
