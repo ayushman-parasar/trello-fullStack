@@ -23,8 +23,8 @@ class CreatedCardForm extends React.Component{
     handleSubmit=(event)=>{
         event.preventDefault();
         // on creating without axios it shows login screen bug
-        // axios('/home/')
-        this.props.history.push('')
+        // axios(`/home/list/${this.props.match.params.listId}/card`)
+        console.log("checking its working")
     }
 
     render(){
