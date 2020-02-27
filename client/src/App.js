@@ -118,7 +118,7 @@ class App extends React.Component {
     return (
       <Router>
         {
-          localStorage.token ? <Header /> : (
+          localStorage.token ? <Header user={this.state.currentUser && this.state.currentUser} /> : (
             <div  className="header-primary">
               <nav>
                 <List>

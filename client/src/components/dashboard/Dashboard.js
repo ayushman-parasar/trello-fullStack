@@ -71,7 +71,7 @@ class DashBoard extends React.Component {
                                         return (
                                             <Flex key={board._id}>
                                                 <Box mr={2} className="small-board-box" w={8} h={8}  borderWidth="1px" borderColor="blue"></Box>
-                                                <h3>{board.title}</h3>
+                                                <Link to={`/${this.props.user && this.props.user._id}/${board._id}/view`}>{board.title}</Link>
                                             </Flex>
                                         )
                                     })
