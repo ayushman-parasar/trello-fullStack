@@ -95,7 +95,7 @@ class ShowBoard extends React.Component {
                         
                     </Box>
                 </Flex>
-                <button onClick={this.props.logout}>LogOut</button>
+                {/* <button onClick={this.props.logout}>LogOut</button> */}
             </div>
         )
     }

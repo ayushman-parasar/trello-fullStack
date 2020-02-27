@@ -19,12 +19,14 @@ var auth =require('../modules/middlewares')
 router.post('/register',(req, res, next) => {
   let email = req.body.email;
   User.findOne({email:email},(err, userTemp)=>{
+    // console.log("register route 1")
       if(err) return next(err)
       if(userTemp){
       res.json({"foundUser in register":userTemp})
     }else{
      User.create(req.body,(err, createdUser)=>{
       if(err) return next(err)
+      console.log("register route")
       res.json({"new Registered User" : createdUser})
      }) // res.redirect('/users/login')
     }

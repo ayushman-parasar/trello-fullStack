@@ -1,14 +1,14 @@
 import React from "react"
 import { render } from "@testing-library/react"
 import Header from "./miniComponents/header"
-import { Link } from "react-router-dom"
+import { Link, withRouter } from "react-router-dom"
 import { Box, Heading, Icon, Flex, Divider, IconButton, Image, Text } from "@chakra-ui/core"
 import axios from "axios"
 
 
 class DashBoard extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             boards: []
         }
@@ -23,7 +23,7 @@ class DashBoard extends React.Component {
             }
         }).then(res => {
             this.setState({
-                boards:res.data.boards.boardsCreated
+                boards:res.data.boards && res.data.boards.boardsCreated
             })
             
         })
@@ -38,7 +38,7 @@ class DashBoard extends React.Component {
                         <Box className="aside-btn"  width={190} bg="transparent" m={2} p={1} >
                             <Flex align="center">
                                 <Icon name="info"/>
-                                <Heading as="h6" ml={2} fontSize="10px"><Link to={`/${this.props.user && this.props.user_id}/boards`}>Boards</Link></Heading>
+                                <Heading as="h6" ml={2} fontSize="10px"><a href={`/${this.props.user && this.props.user_id}/boards`}>Boards</a></Heading>
                             </Flex>
                         </Box>
                         {/* ----Testing --- */}
@@ -56,7 +56,7 @@ class DashBoard extends React.Component {
                         </Flex>
                         
                     </Box>
-                    <Box className="hero-section" w="350px" borderWidth="1px" boxShadow="sm" rounded="sm" ml={20} mr={20}>
+                    <Box className="hero-section" w="350px" borderWidth="1px" boxShadow="sm" rounded="sm" ml={20} mr={20} height="230px">
                         <Image   width="100%" src="https://a.trellocdn.com/prgb/dist/images/home/orientation/no-content.e25c676458c1f4cb280b.svg" />
                         <Box bg="white"  h={120} width="100%">
                             <Heading fontSize="13px" p={2} textAlign="center"  >Stay on track and up to date</Heading>
@@ -67,14 +67,14 @@ class DashBoard extends React.Component {
                         <Box>
                             <Text>--------</Text>
                                 {
-                                    this.state.boards.map(board => {
+                                    this.state.boards?this.state.boards.map(board => {
                                         return (
                                             <Flex key={board._id}>
                                                 <Box mr={2} className="small-board-box" w={8} h={8}  borderWidth="1px" borderColor="blue"></Box>
                                                 <Link to={`/${this.props.user && this.props.user._id}/${board._id}/view`}>{board.title}</Link>
                                             </Flex>
                                         )
-                                    })
+                                    }):null
                                 }
                             <Text>--------</Text>
                         </Box>
@@ -86,11 +86,11 @@ class DashBoard extends React.Component {
                         
                     </Box>
                 </Flex>
-                <button onClick={this.props.logout}>LogOut</button>
+                {/* <button onClick={this.props.logout}>LogOut</button> */}
             </div>
         )
     }
 }
 
-export default DashBoard
+export default withRouter(DashBoard)
 

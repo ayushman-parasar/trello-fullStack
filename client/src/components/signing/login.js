@@ -28,10 +28,14 @@ class Login extends React.Component {
             },
             data: {email: this.state.email, password: this.state.password}
         }).then(res => {
-            this.props.setUser(res.data.profile);
+            console.log("yello ",res)
+            // this.props.setUser(res.data.profile);
             localStorage.setItem("token", res.data.token);
-            this.props.history.push(`/dashboard/b`)
-        })
+            console.log({localStorage})
+            this.props.history.push(`/`)
+        }).then(res =>
+            console.log(res)
+        )
     }
 
     render() {

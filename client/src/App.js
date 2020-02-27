@@ -47,18 +47,20 @@ class App extends React.Component {
       }
   }).then(res => {
       this.setState({
-          boards:res.data.boards.boardsCreated
+          boards:res.data.boards && res.data.boards.boardsCreated,
+          
       })
       // console.log(res)
       
   }))
   }
 
-  setUser = (user) => {
-    this.setState({
-      currentUser: user
-    });
-  }
+  // setUser = (user) => {
+  //   this.setState({
+  //     currentUser:user
+  //   });
+  // }
+
 
   logOutUser = () => {
     this.setState({
@@ -100,14 +102,14 @@ class App extends React.Component {
   publicRoutes = () => {
     return (
       <>
-        <Route path="/" component={LandingPage} exact/>
+        <Route path="/landingPage" component={LandingPage} exact/>
         <Route path="/users/login">
           <Login setUser={this.setUser}/>
         </Route>
         <Route path="/users/register" component={Register} />
         <Route>
           { console.log("checking")}
-          <Redirect to="/users/login" />
+          <Redirect to="/landingPage"/>
         </Route>
       </>
     )
@@ -118,7 +120,7 @@ class App extends React.Component {
     return (
       <Router>
         {
-          localStorage.token ? <Header user={this.state.currentUser && this.state.currentUser} /> : (
+          localStorage.token ? <Header user={this.state.currentUser && this.state.currentUser} logout={this.logOutUser} /> : (
             <div  className="header-primary">
               <nav>
                 <List>
