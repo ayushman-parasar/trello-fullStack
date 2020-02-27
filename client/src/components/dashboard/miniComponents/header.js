@@ -9,7 +9,6 @@ import {
     MenuItem,
     MenuGroup,
     MenuDivider,
-    MenuOptionGroup,
     MenuItemOption,
     Button
   } from "@chakra-ui/core";
