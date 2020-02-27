@@ -71,7 +71,7 @@ class App extends React.Component {
       <>
         { console.log("checking privateRoute")}
         
-        <Route path="/dashboard/b" exact >
+        <Route path="/" exact >
           <DashBoard logout={this.logOutUser} user={this.state.currentUser && this.state.currentUser}/>
         </Route>
         <Route path="/dashboard/b/create">
@@ -88,13 +88,11 @@ class App extends React.Component {
           <CreateListForm />
         </Route>
         
-        <Route exact path="/user/golmal/log"  >
+        <Route exact path="/:userId/:boardId/:listId/card"  >
           <CreateCardForm />
         </Route>
 
-        {/* <Route>
-          <Redirect to="/dashboard/b" />
-        </Route> */}
+        
 
       </>
     )

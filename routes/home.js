@@ -143,9 +143,9 @@ router.post('/list/:listId/card', auth.verifyToken,(req, res, next)=>{
                 list.save()
                 Board.findById(boardId,(err, updatedBoardWithCard)=>{
                     if(err) return next(err)
-                    updatedBoardWithCard.cards.push(boardId)
+                    updatedBoardWithCard.cards.push(card._id)
                     updatedBoardWithCard.save()
-                    res.json({updatedBoardWithCard})
+                    res.json({"updatedBoardWithCard":updatedBoardWithCard,"createdCard":card})
                 })
            
                 // res.redirect(`/home/board/${boardId}/view`)

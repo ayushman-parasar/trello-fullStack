@@ -46,7 +46,7 @@ class DashBoard extends React.Component {
                         <Box className="aside-btn" width={190} bg="transparent" m={2} p={1}>
                             <Flex align="center">
                                 <Icon name="info" />
-                                <Heading as="h6" ml={2} fontSize="10px"><Link to="/:userId/b">Home</Link></Heading>
+                                <Heading as="h6" ml={2} fontSize="10px"><Link to="/">Home</Link></Heading>
                             </Flex>
                         </Box>
                         <Divider width="200px"/>
