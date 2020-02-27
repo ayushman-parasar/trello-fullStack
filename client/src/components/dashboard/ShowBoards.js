@@ -28,14 +28,14 @@ class ShowBoard extends React.Component {
                         <Box className="aside-btn"  width={190} bg="transparent" m={2} p={1} >
                             <Flex align="center">
                                 <Icon name="info"/>
-                                <Heading as="h6" ml={2} fontSize="10px"><Link to={`/${this.props.user._id}/boards`}>Boards</Link></Heading>
+                                <Heading as="h6" ml={2} fontSize="10px"><Link to={`/${this.props.user && this.props.user._id}/boards`}>Boards</Link></Heading>
                             </Flex>
                         </Box>
                         {/* ----Testing --- */}
                         <Box className="aside-btn" width={190} bg="transparent" m={2} p={1}>
                             <Flex align="center">
                                 <Icon name="info" />
-                                <Heading as="h6" ml={2} fontSize="10px"><Link to="/dashboard/b">Home</Link></Heading>
+                                <Heading as="h6" ml={2} fontSize="10px"><Link to="/">Home</Link></Heading>
                             </Flex>
                         </Box>
                         <Divider width="200px"/>
@@ -52,7 +52,7 @@ class ShowBoard extends React.Component {
                                 return(
                                     <Flex >
                                         <Box key={board._id} width={100} height={70} border="1px solid" bg={this.state.colors[Math.floor(Math.random() * Math.floor(4))]} >
-                                            <Link to={`/${this.props.user._id}/${board._id}/view`}>
+                                            <Link to={`/${this.props.user && this.props.user._id}/${board._id}/view`}>
                                                 {board.title}
                                             </Link>
                                         </Box>

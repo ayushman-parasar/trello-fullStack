@@ -38,7 +38,7 @@ class DashBoard extends React.Component {
                         <Box className="aside-btn"  width={190} bg="transparent" m={2} p={1} >
                             <Flex align="center">
                                 <Icon name="info"/>
-                                <Heading as="h6" ml={2} fontSize="10px"><Link to={`/${this.props.user._id}/boards`}>Boards</Link></Heading>
+                                <Heading as="h6" ml={2} fontSize="10px"><Link to={`/${this.props.user && this.props.user_id}/boards`}>Boards</Link></Heading>
                             </Flex>
                         </Box>
                         {/* ----Testing --- */}
@@ -46,7 +46,7 @@ class DashBoard extends React.Component {
                         <Box className="aside-btn" width={190} bg="transparent" m={2} p={1}>
                             <Flex align="center">
                                 <Icon name="info" />
-                                <Heading as="h6" ml={2} fontSize="10px"><Link to="/:userId/b">Home</Link></Heading>
+                                <Heading as="h6" ml={2} fontSize="10px"><Link to="/">Home</Link></Heading>
                             </Flex>
                         </Box>
                         <Divider width="200px"/>
@@ -71,7 +71,7 @@ class DashBoard extends React.Component {
                                         return (
                                             <Flex key={board._id}>
                                                 <Box mr={2} className="small-board-box" w={8} h={8}  borderWidth="1px" borderColor="blue"></Box>
-                                                <h3>{board.title}</h3>
+                                                <Link to={`/${this.props.user && this.props.user._id}/${board._id}/view`}>{board.title}</Link>
                                             </Flex>
                                         )
                                     })

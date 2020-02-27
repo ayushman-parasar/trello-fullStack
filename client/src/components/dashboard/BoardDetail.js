@@ -1,6 +1,6 @@
 import React from "react"
 import { Link, withRouter } from "react-router-dom"
-import { Box, Button, Flex } from "@chakra-ui/core"
+import { Box, Button, Flex, Text } from "@chakra-ui/core"
 import { Editable, EditableInput, EditablePreview } from "@chakra-ui/core";
 import axios from "axios"
 
@@ -23,7 +23,9 @@ class BoardDetail extends React.Component{
         }).then(res=> 
             // console.log("hrio",res)
             this.setState({
-                currentBoard:res.data.board
+                currentBoard:res.data.board,
+               
+                
             })
         )
     }
@@ -38,15 +40,25 @@ class BoardDetail extends React.Component{
                 <Flex direction="row">
                     {
                         this.state.currentBoard ? this.state.currentBoard.lists.map(list=>{
-                            return(<Box borderWidth="1px" rounded="lg" mr={4} textAlign="center" borderColor="black" key={list._id}>
+                            return(<Box borderWidth="1px" rounded="lg" mr={4} height={300} textAlign="center" borderColor="black" key={list._id}>
                                     <Flex direction="row">
-                                        <Box width="100%" height="30vh" boxShadow="md">
+                                        <Box width="100%" >
                                             <Editable width="150px" defaultValue={`${list.title}`}>
                                                 <EditablePreview />
                                                 <EditableInput />
                                             </Editable>
+                                            {
+                                                list.cardId ? (list.cardId.map(card =>{
+                                                    return(
+                                                        <Editable width="130px" defaultValue={`${card.title}`}>
+                                                            <EditablePreview />
+                                                            <EditableInput />
+                                                        </Editable>
+                                                        )
+                                                })):null
+                                            }
                                             <Box fontSize="12px" >
-                                                <Link to={`/${this.props.match.params.boardId}/${list._id}`}>create card</Link>
+                                                <a href={`/${this.props.match.params.userId}/${this.props.match.params.boardId}/${list._id}/card`}>Create Card</a>
                                             </Box>
                                         </Box>
                                     </Flex>

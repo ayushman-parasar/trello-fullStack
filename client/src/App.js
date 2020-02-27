@@ -66,10 +66,40 @@ class App extends React.Component {
     })
     localStorage.clear();
   }
+  privateRoutes = () => {
+    return (
+      <>
+        { console.log("checking privateRoute")}
+        
+        <Route path="/" exact >
+          <DashBoard logout={this.logOutUser} user={this.state.currentUser && this.state.currentUser}/>
+        </Route>
+        <Route path="/dashboard/b/create">
+            <CreatedBoardForm user={this.state.currentUser && this.state.currentUser}/> 
+        </Route>
+        <Route path="/:userId/boards" exact>
+          <ShowBoard user={this.state.currentUser && this.state.currentUser} boards={this.state.boards}/>
+        </Route>
+        <Route path="/:userId/:boardId/view" exact>
+          <BoardDetail />
+        </Route>
 
+        <Route path="/:userId/:boardId/list" exact>
+          <CreateListForm />
+        </Route>
+        
+        <Route exact path="/:userId/:boardId/:listId/card"  >
+          <CreateCardForm />
+        </Route>
+
+        
+
+      </>
+    )
+  }
   publicRoutes = () => {
     return (
-      <Switch>
+      <>
         <Route path="/" component={LandingPage} exact/>
         <Route path="/users/login">
           <Login setUser={this.setUser}/>
@@ -79,44 +109,16 @@ class App extends React.Component {
           { console.log("checking")}
           <Redirect to="/users/login" />
         </Route>
-      </Switch>
+      </>
     )
   }
 
-  privateRoutes = () => {
-    return (
-      <Switch>
-        { console.log("checking privateRoute")}
-        <Route path="/dashboard/b" exact >
-          <DashBoard logout={this.logOutUser} user={this.state.currentUser}/>
-        </Route>
-        <Route path="/dashboard/b/create">
-            <CreatedBoardForm user={this.state.currentUser}/> 
-        </Route>
-        <Route path="/:userId/boards" exact>
-          <ShowBoard user={this.state.currentUser} boards={this.state.boards}/>
-        </Route>
-        <Route path="/:userId/:boardId/view" exact>
-          <BoardDetail />
-        </Route>
-
-        <Route path="/:userId/:boardId/list" exact>
-          <CreateListForm />
-        </Route>
-        <Route path="/:boardId/:listId/card" >
-          <CreateCardForm />
-        </Route>
-        <Route>
-          <Redirect to="/dashboard/b" />
-        </Route>
-      </Switch>
-    )
-  }
+  
   render(){
     return (
       <Router>
         {
-          localStorage.token && this.state.currentUser ? <Header /> : (
+          localStorage.token ? <Header user={this.state.currentUser && this.state.currentUser} /> : (
             <div  className="header-primary">
               <nav>
                 <List>
@@ -130,11 +132,14 @@ class App extends React.Component {
             </div>
           )
         }
+        <Switch>
+          {
+            localStorage.token  ? this.privateRoutes() : this.publicRoutes()
+            
+          }
+        </Switch>
   
-        {
-          localStorage.token && this.state.currentUser ? this.privateRoutes() : this.publicRoutes()
-          
-        }
+        
   
       </Router>
       )

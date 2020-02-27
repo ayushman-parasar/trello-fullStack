@@ -35,7 +35,7 @@ class CreatedBoardForm extends React.Component{
             this.setState({
                 createdBoard:res.data.createdBoard
             })
-            this.props.history.push("/dashboard/b");
+            this.props.history.push("/");
         })
             
         // console.log(this.props.user._id)
