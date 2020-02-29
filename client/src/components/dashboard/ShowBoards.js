@@ -45,8 +45,7 @@ class ShowBoard extends React.Component {
                         </Flex>
                         
                     </Box>
-                    <Box>
-                        <Box m={10}>
+                    <Box>                        <Box m={10}>
                             
                             {this.props.boards.map((board)=>{
                                 return(
