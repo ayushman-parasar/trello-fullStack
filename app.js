@@ -10,7 +10,7 @@ const dotenv = require('dotenv')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var homeRouter = require('./routes/home')
-
+const emailRouter = require('./routes/email')
 
 mongoose.connect('mongodb://localhost/trellofinal', 
 {
@@ -33,11 +33,23 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 dotenv.config()
 
-
-app.use('/', indexRouter);
+// app.use((req,res,next)=>{
+//   console.log(req.path,"path");
+//   next()
+// })
 app.use('/users', usersRouter);
+app.use('/email', emailRouter)
 // app.use(middleware.isAuthenticated)
 app.use('/home', homeRouter)
+// app.use((req,res,next)=>{
+//   console.log(req.path,"path1");
+//   next()
+// })
+app.use('/', indexRouter);
+// app.use((req,res,next)=>{
+//   console.log(req.path,"path2");
+//   next()
+// })
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

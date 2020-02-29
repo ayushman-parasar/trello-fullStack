@@ -43,14 +43,14 @@ class BoardDetail extends React.Component{
                             return(<Box borderWidth="1px" rounded="lg" mr={4} height={300} textAlign="center" borderColor="black" key={list._id}>
                                     <Flex direction="row">
                                         <Box width="100%" >
-                                            <Editable width="150px" defaultValue={`${list.title}`}>
+                                            <Editable width="150px" defaultValue={`${list.title}`}  fontWeight={2} p={4}>
                                                 <EditablePreview />
                                                 <EditableInput />
                                             </Editable>
                                             {
                                                 list.cardId ? (list.cardId.map(card =>{
                                                     return(
-                                                        <Editable width="130px" defaultValue={`${card.title}`}>
+                                                        <Editable width="130px" defaultValue={`${card.title}`} mr="1px">
                                                             <EditablePreview />
                                                             <EditableInput />
                                                         </Editable>

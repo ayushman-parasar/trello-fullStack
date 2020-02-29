@@ -19,13 +19,14 @@ class LandingPage extends React.Component{
     }
     handleSubmit =(event)=>{
         event.preventDefault()
-        axios("/",{
+        console.log('inside submit')
+        axios("/email",{
             method:"GET",
             headers:{
                 "Content-Type":"application/json"
             }
         }).then(res =>
-            console.log(res))
+            console.log(res,"response"))
         
     }
     
