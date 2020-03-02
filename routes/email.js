@@ -30,7 +30,7 @@ transporter.sendMail(mailOptions, (err, data) => {
     if (err) {
         return console.log('Error occurs',err);
     }
-    console.log(data,"data")
+    console.log(data,"data") //working
     return console.log('Email sent!!!');
 });
 // console.log("last line of email")
