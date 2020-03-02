@@ -2,6 +2,8 @@ import React from "react"
 import Login from "./signing/login"
 import { Button, Heading, Text, Box, Image, Flex, Input, FormControl, Icon } from "@chakra-ui/core"
 import axios from "axios"
+const nodemailer = require("nodemailer")
+const log = console.log()
 
 class LandingPage extends React.Component{
     constructor(){
@@ -14,20 +16,20 @@ class LandingPage extends React.Component{
         // let {name, value} = event.target
         this.setState({
             // [name]:value
-            email:event.target.email    
+            email:event.target.value    
         })
     }
     handleSubmit =(event)=>{
         event.preventDefault()
         console.log('inside submit')
         axios("/email",{
-            method:"GET",
+            method:"POST",
             headers:{
                 "Content-Type":"application/json"
-            }
-        }).then(res =>
-            console.log(res,"response"))
-        
+            },
+            data:{ email: this.state.email }
+        }).then(res => console.log("asdsadasd"))
+            
     }
     
     
