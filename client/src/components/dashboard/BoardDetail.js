@@ -2,7 +2,9 @@ import React from "react"
 import { Link, withRouter } from "react-router-dom"
 import { Box, Button, Flex, Text } from "@chakra-ui/core"
 import { Editable, EditableInput, EditablePreview } from "@chakra-ui/core";
+import { DragDropContext } from "react-beautiful-dnd"
 import axios from "axios"
+import List from "./List"
 
 class BoardDetail extends React.Component{
     constructor(){
@@ -29,51 +31,40 @@ class BoardDetail extends React.Component{
             })
         )
     }
-    
-    render(){
-        return(
-            <Box >
-                
-                <Box bg="skyblue" width={120} rounded="lg" p={2} m={2} textAlign="center" >
-                    <Link to={`/${this.props.match.params.userId}/${this.props.match.params.boardId}/list`}>Create List</Link>
-                </Box>
-                <Flex direction="row">
-                    {
-                        this.state.currentBoard ? this.state.currentBoard.lists.map(list=>{
-                            return(<Box borderWidth="1px" rounded="lg" mr={4} height={300} textAlign="center" borderColor="black" key={list._id}>
-                                    <Flex direction="row">
-                                        <Box width="100%" >
-                                            <Editable width="150px" defaultValue={`${list.title}`}  fontWeight={2} p={4}>
-                                                <EditablePreview />
-                                                <EditableInput />
-                                            </Editable>
-                                            {
-                                                list.cardId ? (list.cardId.map(card =>{
-                                                    return(
-                                                        <Editable width="130px" defaultValue={`${card.title}`} mr="1px">
-                                                            <EditablePreview />
-                                                            <EditableInput />
-                                                        </Editable>
-                                                        )
-                                                })):null
-                                            }
-                                            <Box fontSize="12px" >
-                                                <a href={`/${this.props.match.params.userId}/${this.props.match.params.boardId}/${list._id}/card`}>Create Card</a>
-                                            </Box>
-                                        </Box>
-                                    </Flex>
-                            </Box>)
-                        }
+    onDragEnd =(result) =>{
+        //to : reorder list
 
-                        ):null
-                    } 
-                </Flex>
-                
-                
-            </Box>
-        )
-        
     }
 
+
+
+    render(){
+        return(
+            <div>
+            
+                <Box >
+                    <Box bg="skyblue" width={120} rounded="lg" p={2} m={2} textAlign="center" >
+                        <Link to={`/${this.props.match.params.userId}/${this.props.match.params.boardId}/list`}>Create List</Link>
+                    </Box>
+                    <DragDropContext onDragEnd={this.onDragEnd}>
+                    <Flex direction="row">
+                        {
+                            this.state.currentBoard ? this.state.currentBoard.lists.map(list=>{
+                                return(
+                                <Box borderWidth="1px" rounded="lg" mr={4} height={300} textAlign="center" borderColor="black" key={list._id}>
+                                    <Flex direction="row">
+                                        <List list={list} userId={this.props.match.params.userId} boardId={this.props.match.params.boardId} />
+                                    </Flex>
+                                </Box>)
+                            }
+                            ):null
+                        } 
+                    </Flex>
+                    </DragDropContext>
+                </Box>
+            
+            </div>
+        )
+    }
 } 
 export default withRouter(BoardDetail)
